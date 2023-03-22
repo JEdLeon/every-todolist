@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today</title>
+    <!--My CSS-->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <div id="heading" class="box">
+        <h1><%= today %></h1>
+        <h1><%= listName %></h1>
+    </div>
+
+    <div class="box">
+
+        <% for (let item of items) {%>
+            <form action="/delete" method="post">
+                <div class="item">
+                    <input type="hidden" name="listName" value="<%= listName %>">
+                    <input type="checkbox" name="itemToDelete" value="<%= item._id %>" onclick="this.form.submit()">
+                    <p><%= item.item %></p>
+                </div>
+            </form>
+            <%}%>
+                <form class="item" action="/listname/<%= reqParam %>" method="post">
+                    <input type="text" name="newItem" placeholder="New Task..." autocomplete="off" required>
+                    <button type="submit" name="submit">+</button>
+                </form>
+    </div>
+
+    <footer>
+        <p>© 2023 Javier Ornelas León</p>
+    </footer>
+
+    <!--My JS-->
+    <script type="text/javascript" src="javascript/script.js"></script>
+</body>
+
+</html>
