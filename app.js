@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const _ = require('lodash');
 
-//connect to the local server
+//connect to the local server or atlas server
 const urlConnection = "mongodb+srv://jeduardoleon22:y0UD17rw2KFKx0sU@todocluster.7qrabmy.mongodb.net/todolistDB"
 main().catch(err => { console.log(err) });
 async function main() {
