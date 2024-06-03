@@ -1,3 +1,4 @@
+require('dotenv').config();
 //Require needed modules in this To Do List web site
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -5,7 +6,7 @@ const mongoose = require('mongoose');
 const _ = require('lodash');
 
 //connect to the local server or atlas server
-const urlConnection = "mongodb+srv://jeduardoleon22:y0UD17rw2KFKx0sU@todocluster.7qrabmy.mongodb.net/todolistDB"
+const urlConnection = `${process.env.ATLASDB}/todolistDB`
 main().catch(err => { console.log(err) });
 async function main() {
     await mongoose.connect(urlConnection);
@@ -63,36 +64,36 @@ app.route('/listname/:listName')
                 if (docs.length == 0) {
                     if (listName === "Main List") {
                         Item.insertMany([defaultItem1, defaultItem2, defaultItem3])
-                        /*.then(docs => {
-                            console.log('Main list created');
-                        })*/
-                        .catch(error => {
-                            if(error){
-                                setTimeout(() => {
-                                    console.log("Could not create the list...");
-                                    console.log(error);
-                                    res.redirect(`/listname/${reqParam}`);
-                                }, 200);
-                            }
-                        })
+                            /*.then(docs => {
+                                console.log('Main list created');
+                            })*/
+                            .catch(error => {
+                                if (error) {
+                                    setTimeout(() => {
+                                        console.log("Could not create the list...");
+                                        console.log(error);
+                                        res.redirect(`/listname/${reqParam}`);
+                                    }, 200);
+                                }
+                            })
                     }
                     else {
                         const voidList = new Item({
                             item: 'No items in this list'
                         });
                         voidList.save()
-                        /*.then(docs => {
-                            console.log('New list created');
-                        })*/
-                        .catch(error => {
-                            if(error){
-                                setTimeout(() => {
-                                    console.log("Could not create the list...");
-                                    console.log(error);
-                                    res.redirect(`/listname/${reqParam}`);
-                                }, 200);
-                            }
-                        })
+                            /*.then(docs => {
+                                console.log('New list created');
+                            })*/
+                            .catch(error => {
+                                if (error) {
+                                    setTimeout(() => {
+                                        console.log("Could not create the list...");
+                                        console.log(error);
+                                        res.redirect(`/listname/${reqParam}`);
+                                    }, 200);
+                                }
+                            })
                     }
                     setTimeout(() => {
                         res.redirect(`/listname/${reqParam}`);
@@ -107,7 +108,7 @@ app.route('/listname/:listName')
                 }
             })
             .catch(error => {
-                if(error){
+                if (error) {
                     setTimeout(() => {
                         res.redirect(`/listname/${reqParam}`);
                     }, 200);
@@ -125,7 +126,7 @@ app.route('/listname/:listName')
                 console.log("New item added");
             })*/
             .catch(error => {
-                if(error){
+                if (error) {
                     setTimeout(() => {
                         res.redirect(`/listname/${reqParam}`);
                     }, 200);
@@ -149,7 +150,7 @@ app.route('/delete')
                 console.log("Item deleted");
             })*/
             .catch(error => {
-                if(error){
+                if (error) {
                     setTimeout(() => {
                         console.log('Could not delete the item...');
                         console.log(error);
